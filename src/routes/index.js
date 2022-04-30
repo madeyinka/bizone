@@ -1,7 +1,7 @@
 import { useRoutes } from 'react-router-dom'
 import AuthenticatedRoutes from './middlewares/Authentication'
 import DashboardRoute from './middlewares/Dashboard'
-// import HomeComponent from '../containers/Pages/Landing/Home'
+import HomeComponent from '../containers/Pages/Landing/Home'
 import LoginComponent from '../containers/Auth/Login'
 import ResetPasswordComponent from '../containers/Auth/Reset'
 import UpdatePasswordComponent from '../containers/Auth/Update'
@@ -28,10 +28,10 @@ import UpdateServiceComponent from '../containers/Pages/Dashboard/Services/Updat
 const AppRoutes = () => {
 
     const route = useRoutes([
-        // {
-        //     path: '/',
-        //     element:<HomeComponent />
-        // },
+        {
+            path: '/',
+            element:<HomeComponent />
+        },
         {
             path: 'auth/login',
             element:<LoginComponent />
