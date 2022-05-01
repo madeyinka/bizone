@@ -52,7 +52,7 @@ const AppRoutes = () => {
             element:<AuthenticatedRoutes><DashboardComponent /></AuthenticatedRoutes>, //must be authenticated
             children: [
                 {
-                    path:'index',
+                    path:'',
                     element:<DashboardRoute /> 
                 },
                 {
