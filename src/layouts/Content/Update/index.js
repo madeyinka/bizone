@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactQuill from "react-quill"
-import 'react-quill/dist/quill.snow.css'
+import EditorToolbar, { modules, formats } from "../../../components/Editor/EditorToolbar";
+import "react-quill/dist/quill.snow.css";
 
 
 function UpdateContentLayout({
@@ -70,15 +71,21 @@ function UpdateContentLayout({
                                         ))}
                                     </select>
                                 </div>
-                                <div className="col-md-12 form-group" style={{marginBottom: '60px'}}>
+                                <div className="col-md-12 form-group">
                                     <label htmlFor="content">Content</label>
                                     {/* <textarea className="form-control" defaultValue={content} style={{height: '300px'}}></textarea> */}
-                                    <ReactQuill
-                                        theme="snow"
-                                        value={content}
-                                        onChange={handleContent}
-                                        style={{height: '300px'}}
-                                    />
+                                    <div className="text-editor">
+                                        <EditorToolbar />
+                                        <ReactQuill 
+                                            theme="snow"
+                                            value={content}
+                                            onChange={handleContent}
+                                            placeholder={"Write something here..."}
+                                            modules={modules}
+                                            formats={formats}
+                                            style={{height: '200px'}}
+                                        />
+                                    </div>
                                 </div>
                                 <div className="col-md-6 form-group mb-3">
                                     <label htmlFor="type">Type</label>

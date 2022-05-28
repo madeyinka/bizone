@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
-function LoginLayout({form:{handleChange, formValues, loading, formError, message, validateForm, handleSubmit}}) {
+ 
+function LoginLayout({form:{errMsg, email, setEmail, password, setPassword, userRef, errRef, handleSubmit}}) {
     return (
         <div className="auth-layout-wrap" style={{backgroundImage: 'url(../../assets/images/photo-wide-4.jpg)'}}>
             <div className="auth-content">
@@ -10,19 +10,21 @@ function LoginLayout({form:{handleChange, formValues, loading, formError, messag
                         <div className="col-md-6">
                             <div className="p-4">
                                 <div className="auth-logo text-center mb-4"><img src="../../assets/images/logo.png" alt=""/></div>
-                                {/* <pre>{JSON.stringify(formValues, undefined, 2)}</pre> */}
-                                {formError && <div className="alert alert-danger" role="alert">{message}</div>}
+                                <div ref={errRef} className={ errMsg ? "alert alert-danger" : "offscreen"} role="alert">{errMsg}</div>
                                 <h1 className="mb-3 text-18">Sign In</h1>
                                 <form className="needs-validation" noValidate="novalidate" onSubmit={handleSubmit}>
                                     <div className="form-group">
-                                        <label htmlFor="email">Email address</label>
+                                        <label htmlFor="useremail">Email address</label>
                                         <input 
                                             className="form-control form-control-rounded" 
                                             type="email"
-                                            name="email"
-                                            value={formValues.email}
+                                            id="useremail"
+                                            ref={userRef}
+                                            autoComplete='off'
+                                            value={email}
                                             placeholder="Email address"
-                                            onChange={handleChange}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            required
                                         />
                                     </div>
                                     <div className="form-group">
@@ -31,13 +33,12 @@ function LoginLayout({form:{handleChange, formValues, loading, formError, messag
                                             className="form-control form-control-rounded" 
                                             type="password"
                                             name="password"
-                                            value={formValues.password}
+                                            value={password}
                                             placeholder="Password"
-                                            onChange={handleChange}
+                                            onChange={(e) => setPassword(e.target.value)}
                                             />
                                     </div>
-                                    {/* load this button if loading is false...okay */}
-                                    <button disabled={validateForm} className="btn btn-rounded btn-primary btn-block mt-2" type="submit">Sign In</button>
+                                    <button className="btn btn-rounded btn-primary btn-block mt-2" type="submit">Sign In</button>
                                 </form>
                                 <div className="mt-3 text-center"><Link to="/auth/reset-password" className="text-muted">
                                         <u>Forgot Password?</u></Link></div>

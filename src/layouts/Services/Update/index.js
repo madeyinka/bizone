@@ -1,5 +1,7 @@
 import React from 'react'
-import ReactQuill from "react-quill" 
+import ReactQuill from "react-quill"
+import EditorToolbar, { modules, formats } from "../../../components/Editor/EditorToolbar";
+import "react-quill/dist/quill.snow.css";
 
 function UpdateServiceLayout({handleChange, handleCategory, handleContent, content, handleImage, uploadImage, image, data, status, handleStatus, group, groups, onSubmit}) {
   return (
@@ -39,14 +41,20 @@ function UpdateServiceLayout({handleChange, handleCategory, handleContent, conte
                                     <label htmlFor="slug">Service Icon</label>
                                     <input className="form-control" type="text" name="icon" onChange={handleChange} defaultValue={data.icon} placeholder="Icon Class e.g: fa fa-eye" />
                                 </div>
-                                <div className="col-md-12" style={{marginBottom: '60px'}}>
+                                <div className="col-md-12">
                                     <label htmlFor="content">Content</label>
-                                    <ReactQuill
-                                        theme="snow"
-                                        value={content}
-                                        onChange={handleContent}
-                                        style={{height: '200px'}}
-                                    />
+                                    <div className="text-editor">
+                                        <EditorToolbar />
+                                        <ReactQuill 
+                                            theme="snow"
+                                            value={content}
+                                            onChange={handleContent}
+                                            placeholder={"Write something here..."}
+                                            modules={modules}
+                                            formats={formats}
+                                            style={{height: '200px'}}
+                                        />
+                                    </div>
                                 </div>
                                 <div className="col-md-12">
                                     <button className="btn btn-primary" onClick={onSubmit}>Modify Service</button>

@@ -1,67 +1,115 @@
-import React, { useEffect, useContext , useState} from 'react'
-import { GlobalContext } from '../../../../contexts/Provider'
+import React, { useEffect , useState} from 'react'
 import UpdateProfileLayout from '../../../../layouts/UpdateProfile'
-import { userProfile, updateUser } from '../../../../contexts/actions/auth/user'
+import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import { uploader } from '../../../../contexts/actions/services/upload'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { states } from '../../../../constants/data/states'
 
 function UpdateProfileComponent() {
 
-   const {userState:{user:{data:{response}}}, userDispatch} = useContext(GlobalContext)
-   const user = JSON.parse(localStorage.getItem('user'))
-   const [formValues, setFormValues] = useState({"identity":response._id})
-   const [image, setImage] = useState("")
-   const [url, setUrl] = useState("")
    const navigate = useNavigate()
+   const location = useLocation()
+   const axiosPrivate = useAxiosPrivate()
+   const [data, setData] = useState()
+   const [state, setState] = useState('')
+   const [lga, setLga] = useState('')
+
+
+   //form fields
+   const [formValues, setFormValues] = useState({})
+   const [lgas, setLgas] = useState()
+   const [url, setUrl] = useState('')
+   const [file, setFile] = useState('')
+
 
    useEffect(() => {
-        userProfile(user.id)(userDispatch)
-   },[user.id, userDispatch])
+       let isMounted = true
+       const controller = new AbortController()
 
+       const getUser = async () => {
+           try {
+            const response = await axiosPrivate.get('/client/by-identity', {
+                    signal: controller.signal
+                })
+                isMounted && setData(response.data.response)
+                setState(response.data.response.state_alias)
+                setLga(response.data.response.lga)
+           } catch(err) {
+               navigate('/auth/login', { state: { from: location }, replace: true })
+           }
+       }
+
+       getUser()
+
+       return () => {
+           isMounted = false
+           controller.abort()
+       }
+   },[navigate, location, axiosPrivate])
+
+   //set input field values
    const handleChange = (e) => {
        const {name, value} = e.target
        setFormValues({...formValues, [name]: value})
    }
 
-   const handleSubmit = (e) => {
-       e.preventDefault()
-       updateUser(formValues)(userDispatch)
-       navigate('/dashboard/profile')
+   const handleState = (value) => {
+       setState(value)
+       const state = states.find((lga) => lga.alias === value)
+       setFormValues({...formValues, "state_alias": state.alias, "state":state.state}) 
+       setLgas(state.lgas)
+   }
+
+   const handleLGA = (value) => {
+       setLga(value)
+       setFormValues({...formValues, "lga":value})
    }
 
    const handleImage = (e) => {
-       setImage(e.target.files[0])
-   }
-   
-   const uploadImage = (e) => {
-       e.preventDefault()
-       uploader("image", image)
-       .then(res => {
-            if (res.data) {
-                setUrl(res.data.url)
-            } 
-       })
-       .catch(err => console.log(err))
+       setFile(e.target.files[0])
    }
 
-   const updateImage = () => {
-        const profileImg = {
-            "identity": response._id,
-            "avatar": url
-        }
-        updateUser(profileImg)(userDispatch)
-        setImage(url)
+   const uploadImage = async (e) => {
+       e.preventDefault()
+       try {
+            const resp = await uploader("image", file)
+            if (resp && resp.data) setUrl(resp.data.url)
+            setFormValues({...formValues, "avatar":resp.data.url})
+       } catch (err) {
+           console.error(err)
+       }
+   }
+
+   const handleSubmit = async (e) => {
+       e.preventDefault()
+       try {
+            const response = await axiosPrivate.post('client/modify',
+            JSON.stringify(formValues), 
+            {
+                headers:{'Content-Type': 'application/json'},
+                withCredentials: true
+            })
+            setFormValues(null)
+            navigate('/dashboard/profile')
+       } catch (err) {
+           
+       }
    }
 
     return (
         <UpdateProfileLayout 
-        response={response} 
+        response={data} 
+        states={states}
+        lgas={lgas}
+        url={url}
+        state={state}
+        lga={lga}
         handleChange={handleChange}
-        handleSubmit={handleSubmit}
+        handleState={handleState}
+        handleLGA={handleLGA}
         handleImage={handleImage}
         uploadImage={uploadImage}
-        updateImage={updateImage}
-        url={url}
+        handleSubmit={handleSubmit}
         />
     )
 }

@@ -13,7 +13,7 @@ function ContentComponent() {
                         <div className="card-body">
                             <div className="row">
                                 <div className="col-7">
-                                    <h5 className="t-font-bolder">Bounce Rate</h5><small class="text-muted">Unengaged Sessions</small>
+                                    <h5 className="t-font-bolder">Bounce Rate</h5><small className="text-muted">Unengaged Sessions</small>
                                 </div>
                                 <div className="col-5 text-right">
                                     <h3 className="t-font-boldest">62%</h3>
@@ -32,7 +32,7 @@ function ContentComponent() {
                         <div className="card-body">
                             <div className="row">
                                 <div className="col-7">
-                                    <h5 className="t-font-bolder">Session/User</h5><small class="text-muted">Sessions Per User</small>
+                                    <h5 className="t-font-bolder">Session/User</h5><small className="text-muted">Sessions Per User</small>
                                 </div>
                                 <div className="col-5 text-right">
                                     <h3 className="t-font-boldest">62%</h3>
@@ -51,7 +51,7 @@ function ContentComponent() {
                         <div className="card-body">
                             <div className="row">
                                 <div className="col-7">
-                                    <h5 className="t-font-bolder">Engmt. Rate</h5><small class="text-muted">Engaged Sessions</small>
+                                    <h5 className="t-font-bolder">Engmt. Rate</h5><small className="text-muted">Engaged Sessions</small>
                                 </div>
                                 <div className="col-5 text-right">
                                     <h3 className="t-font-boldest">62%</h3>
@@ -70,7 +70,7 @@ function ContentComponent() {
                         <div className="card-body">
                             <div className="row">
                                 <div className="col-7">
-                                    <h5 className="t-font-bolder">View/Session</h5><small class="text-muted">Views Per Session</small>
+                                    <h5 className="t-font-bolder">View/Session</h5><small className="text-muted">Views Per Session</small>
                                 </div>
                                 <div className="col-5 text-right">
                                     <h3 className="t-font-boldest">62%</h3>

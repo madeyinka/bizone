@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactQuill from "react-quill" 
+import EditorToolbar, { modules, formats } from "../../../components/Editor/EditorToolbar";
+import "react-quill/dist/quill.snow.css";
 
 function AddServiceLayout({handleChange, handleCategory, handleContent, content, handleImage, uploadImage, image, status, handleStatus, groups, onSubmit}) {
     return (
@@ -41,12 +43,18 @@ function AddServiceLayout({handleChange, handleCategory, handleContent, content,
                                 </div>
                                 <div className="col-md-12" style={{marginBottom: '60px'}}>
                                     <label htmlFor="content">Content</label>
-                                    <ReactQuill
-                                        theme="snow"
-                                        value={content}
-                                        onChange={handleContent}
-                                        style={{height: '200px'}}
-                                    />
+                                    <div className="text-editor">
+                                        <EditorToolbar />
+                                        <ReactQuill 
+                                            theme="snow"
+                                            value={content}
+                                            onChange={handleContent}
+                                            placeholder={"Write something here..."}
+                                            modules={modules}
+                                            formats={formats}
+                                            style={{height: '200px'}}
+                                        />
+                                    </div>
                                 </div>
                                 <div className="col-md-12">
                                     <button className="btn btn-primary" onClick={onSubmit}>Add Service</button>

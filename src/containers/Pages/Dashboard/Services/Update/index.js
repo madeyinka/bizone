@@ -58,7 +58,7 @@ function UpdateServiceComponent() {
 
     const handleContent = (value) => {
         setContent(value)
-        setFormValues({...formValues, "description":value})
+        setFormValues({...formValues, "description":JSON.stringify(value)})
     }
 
     const handleImage = (e) => {

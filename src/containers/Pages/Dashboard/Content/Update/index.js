@@ -71,7 +71,7 @@ function UpdateContentComponent() {
         .then(res => {
             setSubcategories(res.data.response)
         })
-      }
+      } 
     }, [subcategories, user, data])
 
     const handleChange = (e) => {

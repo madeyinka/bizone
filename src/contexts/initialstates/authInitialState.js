@@ -1,12 +1,8 @@
 const authInitialState =  {
     auth: {
         loading:false,
-        data:{error:null, message:"", response:{}},
+        data:{},
         error:null
-    },
-    user: {
-        loading:false,
-        data:{}
     }
 }
 

@@ -1,20 +1,41 @@
-import React, {useContext, useEffect} from 'react'
-import { GlobalContext } from '../../../../contexts/Provider'
+import React, {useState, useEffect} from 'react'
 import UserProfileLayout from '../../../../layouts/UserProfile'
-import { userProfile } from '../../../../contexts/actions/auth/user'
+import useAxiosPrivate from '../../../../hooks/useAxiosPrivate'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 export default function UserProfileComponent() {
 
-    const {userState:{user:{data}}, userDispatch} = useContext(GlobalContext)
-    const user = JSON.parse(localStorage.getItem('user'))
+    const axiosPrivate = useAxiosPrivate()
+    const navigate = useNavigate()
+    const location = useLocation()
+    const [data, setData] = useState()
     
      useEffect(() => {
-         userProfile(user.id)(userDispatch)
-     },[user.id, userDispatch])
+         let isMounted = true
+         const controller = new AbortController()
+
+         const getUser = async () => {
+             try {
+                const response = await axiosPrivate.get('/client/by-identity', {
+                    signal: controller.signal
+                })
+                isMounted && setData(response.data.response)
+             } catch (err) {
+                console.error(err)
+                navigate('/auth/login', { state: { from: location }, replace: true })
+             }
+         }
+         getUser()
+
+        return () => {
+            isMounted = false
+            controller.abort()
+        }
+     },[axiosPrivate, navigate, location])
 
     //  console.log(data)
 
     return (
-        <UserProfileLayout profile={data} />
+        <UserProfileLayout response={data} />
     )
 }

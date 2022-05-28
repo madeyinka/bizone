@@ -17,11 +17,6 @@ const authReducer = (state, {payload, type})=>{
                     ...state.auth,
                     loading: false,
                     data: payload
-                },
-                user: {
-                    ...state.user,
-                    laoding:false,
-                    data:{payload, ...state.user.data}
                 }
             }
         case LOGIN_ERROR:

@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactQuill from "react-quill" 
+import EditorToolbar, { modules, formats } from "../../../components/Editor/EditorToolbar";
+import "react-quill/dist/quill.snow.css";
  
 function AddContentLayout({
     type,
@@ -57,7 +59,7 @@ function AddContentLayout({
                                         ))}
                                     </select>
                                 </div>
-                                <div className="col-md-6 form-group mb-4">
+                                <div className="col-md-6 form-group mb-3">
                                     <label htmlFor="title">Sub Catgeory</label>
                                     <select className="form-control" onChange={handleSubCategory}>
                                         <option>Select Sub Category</option>
@@ -66,14 +68,20 @@ function AddContentLayout({
                                         ))}
                                     </select>
                                 </div>
-                                <div className="col-md-12" style={{marginBottom: '60px'}}>
+                                <div className="col-md-12 mb-3">
                                     <label htmlFor="content">Content</label>
-                                    <ReactQuill
-                                        theme="snow"
-                                        value={content}
-                                        onChange={handleContent}
-                                        style={{height: '300px'}}
-                                    />
+                                    <div className="text-editor">
+                                        <EditorToolbar />
+                                        <ReactQuill 
+                                            theme="snow"
+                                            value={content}
+                                            onChange={handleContent}
+                                            placeholder={"Write something here..."}
+                                            modules={modules}
+                                            formats={formats}
+                                            style={{height: '200px'}}
+                                        />
+                                    </div>
                                 </div>
                                 <div className="col-md-6 form-group mb-3">
                                     <label htmlFor="title">Content Type</label>

@@ -4,6 +4,7 @@ import axiosInstance from '../../../../../helpers/axiosInstance'
 import { useParams, useNavigate } from 'react-router-dom'
 
 
+
 function UpdateBlockComponent() {
     const {identity} = useParams()
     const [isActive, setIsActive] = useState(false)
@@ -51,11 +52,8 @@ function UpdateBlockComponent() {
             navigate("/dashboard/static/view")
         } else {
            setError(resp.data.message)
-           console.log(error)
         }
-
     }
-
 
     return <UpdateBlockLayout 
         data={Block}

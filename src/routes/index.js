@@ -1,11 +1,12 @@
 import { useRoutes } from 'react-router-dom'
-import AuthenticatedRoutes from './middlewares/Authentication'
-import DashboardRoute from './middlewares/Dashboard'
+//import AuthenticatedRoutes from './middlewares/Authentication'
+//import DashboardRoute from './middlewares/Dashboard'
 import HomeComponent from '../containers/Pages/Landing/Home'
 import LoginComponent from '../containers/Auth/Login'
 import ResetPasswordComponent from '../containers/Auth/Reset'
 import UpdatePasswordComponent from '../containers/Auth/Update'
 import DashboardComponent from '../containers/Pages/Dashboard'
+import ContentComponent from '../containers/Pages/Dashboard/Home/Content'
 import UserProfileComponent from '../containers/Pages/Dashboard/UserProfile'
 import UpdateProfileComponent from '../containers/Pages/Dashboard/UpdateProfile'
 import AddClientComponent from '../containers/Pages/Dashboard/Clients/AddClient'
@@ -49,11 +50,11 @@ const AppRoutes = () => {
         },
         {
             path: 'dashboard',  //wraps header, navigation and outlet components
-            element:<AuthenticatedRoutes><DashboardComponent /></AuthenticatedRoutes>, //must be authenticated
+            element:<DashboardComponent />, //must be authenticated
             children: [
                 {
                     path:'',
-                    element:<DashboardRoute /> 
+                    element:<ContentComponent /> 
                 },
                 {
                     path:'profile',

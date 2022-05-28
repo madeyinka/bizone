@@ -1,10 +1,10 @@
-/* eslint-disable no-multi-str */
 import React from 'react';
 import { Link } from 'react-router-dom'
-import ReactQuill from "react-quill"
-import 'react-quill/dist/quill.snow.css'
+import ReactQuill from "react-quill";
+import EditorToolbar, { modules, formats } from "../../../components/Editor/EditorToolbar";
+import "react-quill/dist/quill.snow.css";
 
-function UpdateBlockLayout({handleSubmit, handleChange, loading, error, data, isActive, handleToggle, handleContentChange, content}) {
+function UpdateBlockLayout({handleSubmit, handleChange, loading, error, data, isActive, content, handleToggle, handleContentChange}) {
     
   return (
         <div className="main-content">
@@ -31,20 +31,22 @@ function UpdateBlockLayout({handleSubmit, handleChange, loading, error, data, is
                                     <label htmlFor="slug">Slug</label>
                                     <input className="form-control" type="text" name="slug" onChange={handleChange} defaultValue={data?.slug} placeholder="Slug (optional)" />
                                 </div>
-            
-                                {/* <div className="col-md-12 form-group">
-                                    <label htmlFor="content">Content</label>
-                                    <textarea className="form-control" aria-label="With textarea" name="content" onChange={handleChange} defaultValue={data?.content} ></textarea>
-                                </div>  */}
-                                <div className="col-md-12" style={{marginBottom: '50px'}}>
-                                    <ReactQuill
-                                        theme="snow"
-                                        value={content}
-                                        onChange={handleContentChange}
-                                        style={{height: '300px'}} 
-                                    />
+                                <div className="col-md-12">
+                                    <label htmlFor="slug">Content</label>
+                                    <div className="text-editor">
+                                        <EditorToolbar />
+                                        <ReactQuill 
+                                            theme="snow"
+                                            value={content}
+                                            onChange={handleContentChange}
+                                            placeholder={"Write something here..."}
+                                            modules={modules}
+                                            formats={formats}
+                                            style={{height: '200px'}}
+                                        />
+                                    </div>
                                 </div>
-
+                                
                                 <div className="row col-md-12">
                                     <div className="col-md-4 mt-2">
                                         {loading && <button  disabled className="btn btn-primary">Loading...</button>}

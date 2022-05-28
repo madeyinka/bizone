@@ -1,0 +1,26 @@
+  .app {
+    margin: 1rem auto;
+    max-width: 100rem;
+  }
+  
+  .app .ql-container {
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    background: #fefcfc;
+  }
+  
+  .app .ql-toolbar {
+    background: #eaecec;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+    border-bottom: none;
+  }
+
+  .ql-snow.ql-toolbar .switchbotton {
+      width:40px
+  }
+  
+  .ql-editor  { display: block; }
+  .raw-editor { display: none; width: 100%; }
+  .showRaw .ql-editor  { display: none; }
+  .showRaw .raw-editor { display: block; }

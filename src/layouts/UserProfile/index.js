@@ -1,8 +1,6 @@
 import React from 'react'
 
-function UserProfileLayout(
-    {profile:{response}}
-) {
+function UserProfileLayout({response}) {
     return (
         <div className="main-content">
             	<div className="breadcrumb">
@@ -21,10 +19,10 @@ function UserProfileLayout(
                             {/* <div className="card"> */}
                                 <div className="card-body">
                                     <div className="user-profile mb-4">
-                                        <div className="ul-widget-card__user-info border-bottom-gray-200 pb-3"><img className="profile-picture avatar-xl mb-2" src={response.avatar} alt="alt" />
-                                            <p className="m-0 text-24">{response.fname} {response.lname}</p>
-                                            <p className="text-muted m-0"><a href="http://demos.ui-lib.com/gull/html/layout1/href">{response.email}</a></p>
-                                            <div className="mt-3 ul-widget-app__skill-margin"><span className="text-15">{response.role}</span></div>
+                                        <div className="ul-widget-card__user-info border-bottom-gray-200 pb-3"><img className="profile-picture avatar-xl mb-2" src={response?.avatar} alt="alt" />
+                                            <p className="m-0 text-24">{response?.fname} {response?.lname}</p>
+                                            <p className="text-muted m-0"><a href="http://demos.ui-lib.com/gull/html/layout1/href">{response?.email}</a></p>
+                                            <div className="mt-3 ul-widget-app__skill-margin"><span className="text-15">{response?.role}</span></div>
                                         </div>
                                         <div className="ul-widget-app__profile-footer mt-4">
                                             <div className="ul-widget-app__profile-footer-font"><a href="/"><i className="i-Speach-Bubble-6 text-16 font-weight-600 mr-1"></i><span className="text-16 font-weight-600">Activities</span></a></div>
@@ -39,41 +37,41 @@ function UserProfileLayout(
                                 <div className="card-body">
                                     <h4>Company Information</h4>
                                         <p>
-                                            {response.site_desc}
+                                            {response?.site_desc}
                                         </p>
                                     <hr />
                                 <div className="row">
                                     <div className="col-md-4 col-6">
                                         <div className="mb-4">
-                                            <p className="text-primary mb-1"><i className="i-Building text-16 mr-1"></i> Company</p><span>{response.company}</span>
+                                            <p className="text-primary mb-1"><i className="i-Building text-16 mr-1"></i> Company</p><span>{response?.company}</span>
                                         </div>
                                         <div className="mb-4">
-                                            <p className="text-primary mb-1"><i className="i-Edit-Map text-16 mr-1"></i> LGA</p><span>{response.lga}</span>
+                                            <p className="text-primary mb-1"><i className="i-Edit-Map text-16 mr-1"></i> LGA</p><span>{response?.lga}</span>
                                         </div>
                                         <div className="mb-4">
-                                            <p className="text-primary mb-1"><i className="i-Facebook text-16 mr-1"></i> Facebook</p><span>{response.facebook}</span>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-4 col-6">
-                                        <div className="mb-4">
-                                            <p className="text-primary mb-1"><i className="i-Life-Safer text-16 mr-1"></i> Category</p><span>{response.sector}</span>
-                                        </div>
-                                        <div className="mb-4">
-                                            <p className="text-primary mb-1"><i className="i-Map text-16 mr-1"></i> State</p><span>{response.state}</span>
-                                        </div>
-                                        <div className="mb-4">
-                                            <p className="text-primary mb-1"><i className="i-Twitter text-16 mr-1"></i> Twitter</p><span>{response.twitter}</span>
+                                            <p className="text-primary mb-1"><i className="i-Facebook text-16 mr-1"></i> Facebook</p><span>{response?.facebook}</span>
                                         </div>
                                     </div>
                                     <div className="col-md-4 col-6">
                                         <div className="mb-4">
-                                            <p className="text-primary mb-1"><i className="i-Cloud text-16 mr-1"></i> Website</p><span>{response.website}</span>
+                                            <p className="text-primary mb-1"><i className="i-Life-Safer text-16 mr-1"></i> Sector </p><span>{response?.sector}</span>
                                         </div>
                                         <div className="mb-4">
-                                            <p className="text-primary mb-1"><i className="i-Flag text-16 mr-1"></i> Country</p><span>{response.country}</span>
+                                            <p className="text-primary mb-1"><i className="i-Map text-16 mr-1"></i> State</p><span>{response?.state}</span>
                                         </div>
                                         <div className="mb-4">
-                                            <p className="text-primary mb-1"><i className="i-Instagram text-16 mr-1"></i> Instagram</p><span>{response.instagram}</span>
+                                            <p className="text-primary mb-1"><i className="i-Twitter text-16 mr-1"></i> Twitter</p><span>{response?.twitter}</span>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-4 col-6">
+                                        <div className="mb-4">
+                                            <p className="text-primary mb-1"><i className="i-Cloud text-16 mr-1"></i> Website</p><span>{response?.website}</span>
+                                        </div>
+                                        <div className="mb-4">
+                                            <p className="text-primary mb-1"><i className="i-Flag text-16 mr-1"></i> Country</p><span>{response?.country}</span>
+                                        </div>
+                                        <div className="mb-4">
+                                            <p className="text-primary mb-1"><i className="i-Instagram text-16 mr-1"></i> Instagram</p><span>{response?.instagram}</span>
                                         </div>
                                     </div>
                                 </div>
